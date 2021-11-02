@@ -5,7 +5,7 @@ import Logueo from './components/Logueo';
 
 const App = () => {
 
-  const [ userGlobal, setUserGlobal ] = useState(true);
+  const [ userGlobal, setUserGlobal ] = useState(false);
 
 
   //funcion que se ejecutar al detectar autentificacion
