@@ -1,7 +1,9 @@
 import React from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../FIrebase/Credentials';
-import { Container, Button } from 'react-bootstrap'
+import { Container, Button } from 'react-bootstrap';
+import TaskList from './TaskList';
+import AddTask from './AddTask';
 
 const Home = () => {
     return (
@@ -10,6 +12,9 @@ const Home = () => {
             <Button
                 onClick= {() => signOut(auth) }
             >Cerrar sesion</Button>
+            <br/>
+            {/* {<TaskList />} */}
+            <AddTask/>
         </Container>
     )
 }
