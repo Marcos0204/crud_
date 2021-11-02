@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { Stack, Container, Form, Button } from "react-bootstrap";
-import { createUserWithEmailAndPassword,
-            signInWithEmailAndPassword 
-         } from 'firebase/auth';
+import { 
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signInWithRedirect,
+        GoogleAuthProvider
+        } from 'firebase/auth';
 import { auth } from '../FIrebase/Credentials';
+
+
+const googleAuthProvider = new GoogleAuthProvider(); 
 
 const Logueo = () => {
 
@@ -46,7 +52,7 @@ const Logueo = () => {
                 variant="primary"
                 type="submit"
                 style={{ width: "300px" }}
-                //onClick={()=> signInWithRedirect(auth, googleAuthProvider)}
+                onClick={()=> signInWithRedirect(auth, googleAuthProvider)}
             >
                 Acceder con Google
             </Button>
