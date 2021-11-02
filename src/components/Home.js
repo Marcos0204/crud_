@@ -30,6 +30,9 @@ const Home = () => {
     //       return infoDocu.tareas;
     //     }
     //   }
+
+
+    
     return (
         <Container>
             <h1>Sesion iniciada</h1>
