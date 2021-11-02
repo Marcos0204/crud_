@@ -1,29 +1,23 @@
 import React, { useState } from 'react';
 import { Stack, Container, Form, Button } from "react-bootstrap";
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword,
+            signInWithEmailAndPassword 
+         } from 'firebase/auth';
 import { auth } from '../FIrebase/Credentials';
 
 const Logueo = () => {
 
     const [ iseRegister, SetIsRegister ] = useState(false)
 
-    function submitHandler(e) {
+    async function submitHandler(e) {
         e.preventDefault();
         const email= e.target.formBasicEmail.value;
         const password = e.target.formBasicPassword.value;
         if (iseRegister){
-            createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                console.log(user)
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // ..
-            });
+            const user= await createUserWithEmailAndPassword(auth, email, password)
+            console.log(user)
+        } else {
+            signInWithEmailAndPassword(auth, email, password)
         }
 
     }
