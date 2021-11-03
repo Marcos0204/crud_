@@ -1,11 +1,23 @@
 import React from 'react'
 import { Stack, Container, Row, Col, Button} from 'react-bootstrap';
+import { updateDoc, doc } from 'firebase/firestore'
+import { fireStore } from '../FIrebase/Credentials';
 
-const TaskList = ({taskList}) => {
+
+const TaskList = ({task, email, setTask}) => {
+
+    async function deleteTask(id) {
+        const newListTask = task.filter((item) => (item.id !== id));
+        ///update DB
+        const docuRef = doc(fireStore, `usuarios/${email}`);
+        await updateDoc(docuRef, { tareas: [...newListTask] });
+        //update state
+        setTask(newListTask);
+    }
     return (
         <Container>
             <Stack>
-                {taskList.map((item )=> (
+                {task.map((item )=> (
                     <div key={item.id}>
                         <Row >
                             <Col>{item.descripcion}</Col>
@@ -14,7 +26,7 @@ const TaskList = ({taskList}) => {
                             </Col>
                             <Col>
                                 <Button 
-                                //onClick={() => deleteTask(item.id)}
+                                onClick={() => deleteTask(item.id)}
                                 >eliminar Tarea</Button>
                             </Col>
                         </Row>

@@ -54,7 +54,14 @@ const Home = ({email}) => {
             >Cerrar sesion</Button>
             <br/>
             <AddTask/>
-            <TaskList  taskList={fakeData}/>
+            {task && (
+                <TaskList 
+                    task={task}
+                    email={email}
+                    setTask={setTask}
+                />
+            )}
+            
         </Container>
     )
 }
