@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import {  doc, updateDoc } from 'firebase/firestore';
 import { Container, Form, Col, Row, Button } from "react-bootstrap";
-import { fireStore } from '../FIrebase/Credentials';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { fireStore, storage } from '../FIrebase/Credentials';
 
 const AddTask = ({task, email, setTask}) => {
     const [ descripcion , setDescripcion ] = useState('')
+    const [url, setUrl] = useState('')
 
     function addTaskDB(e) {
         e.preventDefault()
@@ -13,7 +15,8 @@ const AddTask = ({task, email, setTask}) => {
             ...task,
             {id: +new Date(),
             descripcion,
-            url:'https://picsum.photos/'}
+            url
+            }
         ]
 
         const docuRef = doc(fireStore, `usuarios/${email}`);
@@ -22,6 +25,19 @@ const AddTask = ({task, email, setTask}) => {
         setTask(newArray)
         setDescripcion('')
     }
+
+    async function handlerFile(e) {
+        //detectar el archivo
+        const img = e.target.files[0]
+        const imgRef= ref(storage, `documents/${img.name}`);
+        
+        ///subir a la DB
+        await uploadBytes(imgRef, img)
+        const download = await getDownloadURL(imgRef);
+        setUrl(download)
+
+    }
+
     return (
             <Container>
                 <Form >
@@ -39,6 +55,7 @@ const AddTask = ({task, email, setTask}) => {
                         <Form.Control
                         type="file"
                         placeholder="Añade archivo"
+                        onChange = {handlerFile}
                         
                         />
                     </Col>

@@ -22,7 +22,9 @@ const TaskList = ({task, email, setTask}) => {
                         <Row >
                             <Col>{item.descripcion}</Col>
                             <Col>
-                                <Button>ver archivo</Button>
+                                <a href={item.url}>
+                                    <Button>ver archivo</Button>
+                                </a>
                             </Col>
                             <Col>
                                 <Button 
