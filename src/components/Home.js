@@ -53,7 +53,11 @@ const Home = ({email}) => {
                 onClick= {() => signOut(auth) }
             >Cerrar sesion</Button>
             <br/>
-            <AddTask/>
+            <AddTask
+                task={task}
+                email={email}
+                setTask={setTask}
+            />
             {task && (
                 <TaskList 
                     task={task}
