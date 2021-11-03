@@ -17,6 +17,7 @@ const App = () => {
       setUserGlobal(null)
     }
   });
+  
 
   //funcion que se ejecutar al detectar autentificacion
 

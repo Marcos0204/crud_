@@ -6,8 +6,8 @@ const TaskList = ({taskList}) => {
         <Container>
             <Stack>
                 {taskList.map((item )=> (
-                    < >
-                        <Row key={item.id}>
+                    <div key={item.id}>
+                        <Row >
                             <Col>{item.descripcion}</Col>
                             <Col>
                                 <Button>ver archivo</Button>
@@ -19,7 +19,7 @@ const TaskList = ({taskList}) => {
                             </Col>
                         </Row>
                         <hr/>
-                    </>)
+                    </div>)
                 )}
             </Stack>
         </Container>
